@@ -21,12 +21,12 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/signin")
-    public ResponseEntity<Optional<User>> post(@RequestBody @Valid User user){
+    public ResponseEntity<Optional<User>> post(@RequestBody User user){
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.create(user));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserLogin> auth(@RequestBody Optional<UserLogin> user){
+    public ResponseEntity<UserLogin> auth(@RequestBody @Valid Optional<UserLogin> user){
         return userService.login(user).map(userAutenticanted -> ResponseEntity.ok(userAutenticanted)).orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
