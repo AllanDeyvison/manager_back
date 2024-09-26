@@ -1,0 +1,44 @@
+package com.manager.controllers;
+
+import com.manager.models.Message;
+import com.manager.repositories.MessageRepository;
+import com.manager.services.MessageService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/message")
+public class MessageController {
+
+    @Autowired
+    private MessageService messageService;
+
+    @PostMapping
+    public ResponseEntity<Message> post(@RequestBody Message message){
+        return ResponseEntity.status(HttpStatus.CREATED).body(messageService.save(message));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Message>> getAll(){
+        return ResponseEntity.ok(messageService.getAll());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Message> getById(@PathVariable Integer id){
+        return ResponseEntity.ok(messageService.getById(id));
+    }
+
+    @PutMapping
+    public ResponseEntity<Message> update(@RequestBody Message message){
+        return  ResponseEntity.ok(messageService.update(message));
+    }
+
+    @DeleteMapping("/{id}")
+    public  void delete(@PathVariable Integer id){
+        messageService.delete(id);
+    }
+}
