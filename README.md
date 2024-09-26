@@ -1,0 +1,1 @@
+variaveis de ambiente : POSTGRES=;POSTGRESDATABASE=seupostgres;POSTGRESHOST=localhost;POSTGRESPASSWORD=suasenha;POSTGRESPORT=5432;POSTGRESUSER=seuuser
