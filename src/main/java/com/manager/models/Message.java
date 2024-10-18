@@ -17,6 +17,7 @@ public class Message {
     @GeneratedValue( strategy = GenerationType.AUTO)
     private Integer id;
     private String menssage;
+    private String answer;
     @ManyToOne
     @JsonIgnoreProperties("menssage")
     private User user;

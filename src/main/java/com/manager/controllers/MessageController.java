@@ -3,6 +3,7 @@ package com.manager.controllers;
 import com.manager.models.Message;
 import com.manager.repositories.MessageRepository;
 import com.manager.services.MessageService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class MessageController {
     private MessageService messageService;
 
     @PostMapping
-    public ResponseEntity<Message> post(@RequestBody Message message){
-        return ResponseEntity.status(HttpStatus.CREATED).body(messageService.save(message));
+    public ResponseEntity<Message> post(@Valid @RequestBody Message message) throws Exception {
+        return ResponseEntity.status(HttpStatus.CREATED).body(messageService.sendMessage(message));
     }
 
     @GetMapping
@@ -30,11 +31,6 @@ public class MessageController {
     @GetMapping("/{id}")
     public ResponseEntity<Message> getById(@PathVariable Integer id){
         return ResponseEntity.ok(messageService.getById(id));
-    }
-
-    @PutMapping
-    public ResponseEntity<Message> update(@RequestBody Message message){
-        return  ResponseEntity.ok(messageService.update(message));
     }
 
     @DeleteMapping("/{id}")
