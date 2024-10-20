@@ -1,0 +1,30 @@
+spring:
+  rabbitmq:
+    addresses: amqps://voujkfip:75DMzZg-cbMwUd4rZqu_-J0pVfrtNJq_@shrimp.rmq.cloudamqp.com/voujkfip
+    queue: cylon
+  jpa:
+    generate-ddl: true
+    database: postgresql
+    show-sql: true
+    properties:
+      jakarta.persistence.sharedCache.mode: ENABLE_SELECTIVE
+  datasource:
+    url: jdbc:postgresql://${POSTGRESHOST}:${POSTGRESPORT}/${POSTGRESDATABASE}
+    username: ${POSTGRESUSER}
+    password: ${POSTGRESPASSWORD}
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Brazil/East
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    disable-swagger-default-url: true
+    packagesToScan: com.manager.controller
+    use-root-path: true
+
+server:
+  port: 8090
