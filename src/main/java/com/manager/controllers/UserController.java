@@ -23,7 +23,12 @@ public class UserController {
 
     @PostMapping("/signup")
     public ResponseEntity<Optional<User>> post(@RequestBody User user){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.create(user));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.create(user));
+        } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
+
     }
 
     @PostMapping("/login")
@@ -38,12 +43,17 @@ public class UserController {
 
     @PutMapping("/update")
     public  ResponseEntity<Optional<User>> update(@RequestBody @Valid User user){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.update(user));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.update(user));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 
     @PatchMapping("/updatePassword")
     public  ResponseEntity<Optional<User>> updatePassword(@RequestBody Map<String, String> user){
         return ResponseEntity.status(HttpStatus.OK).body(userService.updatePassword(user.get("email"), user.get("password")));
     }
+
 
 }

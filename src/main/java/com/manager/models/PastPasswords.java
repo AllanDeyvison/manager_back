@@ -1,5 +1,6 @@
 package com.manager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -14,9 +15,9 @@ import java.util.Date;
 public class PastPasswords {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer psw_id;
+    private Integer pswId;
     @NotNull
-    private Integer user_id;
+    private Integer userId;
     @NotNull
     private String username;
     @NotNull
