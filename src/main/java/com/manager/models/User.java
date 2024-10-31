@@ -32,7 +32,7 @@ public class User {
     private String password;
     @NotNull
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date birthDate;
+    private Date birthday;
     private String picture;
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("user")
