@@ -25,3 +25,6 @@ springdoc:
     disable-swagger-default-url: true
     packagesToScan: com.manager.controller
     use-root-path: true
+
+server:
+  port: 8090

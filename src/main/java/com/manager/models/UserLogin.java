@@ -13,4 +13,5 @@ public class UserLogin {
     private String token;
     private String name;
     private String picture;
+
 }

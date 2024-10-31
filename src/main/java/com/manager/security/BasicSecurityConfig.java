@@ -61,7 +61,8 @@ public class BasicSecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/user/login").permitAll()
-                        .requestMatchers("/user/signin").permitAll()
+                        .requestMatchers("/user/signup").permitAll()
+                        .requestMatchers("/user/updatePassword").permitAll()
                         .requestMatchers("/swagger-ui.html").permitAll()
                         .requestMatchers("/error/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()

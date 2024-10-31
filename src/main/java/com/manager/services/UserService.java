@@ -28,23 +28,26 @@ public class UserService {
     @Autowired
     private JwtService jwtService;
 
-    public Optional<User> create(User user) {
-        Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
-        if(existingUser.isPresent()){
-            return Optional.empty();
+    public Optional<User> create(User user) throws Exception {
+        Optional<User> existingUsername = userRepository.findByUsername(user.getUsername());
+        Optional<User> existingEmail = userRepository.findByEmail(user.getEmail());
+
+        if(existingUsername.isPresent() || existingEmail.isPresent()){
+            throw new Exception();
         }else {
             user.setPassword(criptPassword(user.getPassword()));
             return Optional.of(userRepository.save(user));
         }
     }
 
-    public Optional<User> update(User user) {
+    public Optional<User> update(User user) throws Exception {
         if (userRepository.findById(user.getId()).isPresent()) {
 
-            Optional<User> searchUser = userRepository.findByUsername(user.getUsername());
+            Optional<User> searchUsername = userRepository.findByUsername(user.getUsername());
+            Optional<User> searchEmail = userRepository.findByEmail(user.getEmail());
 
-            if ((searchUser.isPresent()) && (searchUser.get().getId() != user.getId())) {
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Existented User!", null);
+            if (searchUsername.isPresent() || searchEmail.isPresent()) {
+                throw new Exception();
             }
 
             user.setPassword(criptPassword(user.getPassword()));
@@ -54,6 +57,22 @@ public class UserService {
         }
         return Optional.empty();
     }
+
+    public Optional<User> updatePassword(String email, String password) {
+        Optional<User> searchUser = userRepository.findByEmail(email);
+
+        if (searchUser.isPresent()) {
+            System.out.println("Email encontrado!");
+
+            if (searchUser.get().getPassword() != criptPassword(password)) {
+                searchUser.get().setPassword(criptPassword(password));
+                return Optional.ofNullable(userRepository.save(searchUser.get()));
+            }
+
+        }
+        return Optional.empty();
+    }
+
 
     public Optional<UserLogin> login(Optional<UserLogin> userLogin) {
 

@@ -9,17 +9,17 @@ import lombok.Setter;
 import java.util.Date;
 
 @Entity
-@Table(name = "tb_manssage")
+@Table(name = "tb_message")
 @Getter @Setter @NoArgsConstructor
 public class Message {
 
     @Id
     @GeneratedValue( strategy = GenerationType.AUTO)
     private Integer id;
-    private String menssage;
+    private String message;
     private String answer;
     @ManyToOne
-    @JsonIgnoreProperties("menssage")
+    @JsonIgnoreProperties("message")
     private User user;
     @Temporal(TemporalType.TIMESTAMP)
     private  Date date = new Date(System.currentTimeMillis());
