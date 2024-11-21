@@ -56,8 +56,8 @@ public class MessageService {
 
     public Message sendMessage(Message message) throws Exception {
 //        rabbitTemplate.convertAndSend(queueName,message.getMenssage());
-       Message answer = buscaResp(message).block();
-        return messageRepository.save(answer);
+//       Message answer = buscaResp(message).block();
+        return messageRepository.save(message);
     }
 
 

@@ -1,8 +1,11 @@
 package com.manager.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter @Setter @NoArgsConstructor
 public class UserLogin {
@@ -13,5 +16,9 @@ public class UserLogin {
     private String token;
     private String name;
     private String picture;
+    private String lastname;
+    private String email;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date birthday;
 
 }

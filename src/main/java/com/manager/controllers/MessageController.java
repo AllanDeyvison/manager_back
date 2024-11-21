@@ -13,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/message")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MessageController {
 
     @Autowired

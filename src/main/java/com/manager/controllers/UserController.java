@@ -3,12 +3,14 @@ package com.manager.controllers;
 import com.manager.models.Message;
 import com.manager.models.User;
 import com.manager.models.UserLogin;
+import com.manager.repositories.UserRepository;
 import com.manager.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +24,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @PostMapping("/signup")
     public ResponseEntity<Optional<User>> post(@RequestBody User user){
         try {
@@ -33,8 +38,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserLogin> auth(@RequestBody @Valid Optional<UserLogin> user){
-        return userService.login(user).map(userAutenticanted -> ResponseEntity.ok(userAutenticanted)).orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
+    public ResponseEntity<UserLogin> auth(@RequestBody Optional<UserLogin> user){
+        return userService.login(user)
+                .map(userAutenticanted -> ResponseEntity.status(HttpStatus.OK).body(userAutenticanted))
+                .orElse(ResponseEntity.status(HttpStatus.UNAUTHORIZED).build());
     }
 
     @GetMapping("/{id}")
@@ -43,12 +50,12 @@ public class UserController {
     }
 
     @PutMapping("/update")
-    public  ResponseEntity<Optional<User>> update(@RequestBody @Valid User user){
-        try {
-            return ResponseEntity.status(HttpStatus.OK).body(userService.update(user));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).build();
-        }
+    public  ResponseEntity<User> update(@Valid @RequestBody User user){
+            return userService.update(user)
+                    .map(updateUser -> ResponseEntity.status(HttpStatus.OK)
+                            .body(updateUser))
+                    .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+
     }
 
     @PatchMapping("/updatePassword")
@@ -56,5 +63,13 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updatePassword(user.get("email"), user.get("password")));
     }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Integer id){
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        userRepository.deleteById(id);
+    }
 
 }

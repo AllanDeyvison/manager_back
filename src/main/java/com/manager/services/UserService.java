@@ -40,16 +40,13 @@ public class UserService {
         }
     }
 
-    public Optional<User> update(User user) throws Exception {
+    public Optional<User> update(User user) {
         if (userRepository.findById(user.getId()).isPresent()) {
-
             Optional<User> searchUsername = userRepository.findByUsername(user.getUsername());
-            Optional<User> searchEmail = userRepository.findByEmail(user.getEmail());
-
-            if (searchUsername.isPresent() || searchEmail.isPresent()) {
-                throw new Exception();
+//            Optional<User> searchEmail = userRepository.findByEmail(user.getEmail());
+            if ((searchUsername.isPresent()) && (searchUsername.get().getId() != user.getId())) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Existented User!", null);
             }
-
             user.setPassword(criptPassword(user.getPassword()));
 
             return Optional.ofNullable(userRepository.save(user));
@@ -89,7 +86,11 @@ public class UserService {
                 userLogin.get().setName(user.get().getName());
                 userLogin.get().setPicture(user.get().getPicture());
                 userLogin.get().setToken(createToken(userLogin.get().getUsername()));
+                userLogin.get().setEmail(user.get().getEmail());
+                userLogin.get().setLastname(user.get().getLastname());
+                userLogin.get().setBirthday(user.get().getBirthday());
                 userLogin.get().setPassword("");
+
 
                 return userLogin;
             }

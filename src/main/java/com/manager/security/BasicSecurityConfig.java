@@ -55,8 +55,8 @@ public class BasicSecurityConfig {
         http
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .csrf(csrf -> csrf.disable())
-                .cors(Customizer.withDefaults());
+                        .csrf(csrf -> csrf.disable())
+                        .cors(Customizer.withDefaults());
 
         http
                 .authorizeHttpRequests((auth) -> auth
