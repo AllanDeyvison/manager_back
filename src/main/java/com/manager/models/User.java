@@ -34,8 +34,4 @@ public class User {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date birthday;
     private String picture;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("user")
-    private List<Message> messages;
-
 }

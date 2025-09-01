@@ -1,6 +1,5 @@
 package com.manager.controllers;
 
-import com.manager.models.Message;
 import com.manager.models.User;
 import com.manager.models.UserLogin;
 import com.manager.repositories.UserRepository;
@@ -12,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
