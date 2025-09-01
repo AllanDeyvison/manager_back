@@ -17,10 +17,10 @@ public class SwaggerConfig {
     public OpenAPI springBlogPessoalOpenAPI() {
         return new OpenAPI().info(
                         new Info().title("API do user")
-                                .description("Projeto Inteegrador A Inteligencia")
+                                .description("Projeto Integrador AprovIA")
                                 .version("v0.0.1")
                                 .license(new License()
-                                        .name("Allan Bia Nick")
+                                        .name("Allan D., Bia e Nickolas")
                                         .url("https://github.com/AllanDeyvison/manager_back"))
                                 .contact(new Contact()
                                         .name("AIA")
@@ -47,7 +47,7 @@ public class SwaggerConfig {
                 apiResponses.addApiResponse("401", createApiResponse("Pode não, brother!"));
                 apiResponses.addApiResponse("403", createApiResponse("Ta errado isso ai!"));
                 apiResponses.addApiResponse("404", createApiResponse("Não achei!"));
-                apiResponses.addApiResponse("500", createApiResponse("Chama o cara do back q deu ruim!"));
+                apiResponses.addApiResponse("500", createApiResponse("Chama o cara do back que deu ruim!"));
 
             }));
         };
