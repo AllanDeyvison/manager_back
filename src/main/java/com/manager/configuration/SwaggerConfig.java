@@ -16,16 +16,16 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI springBlogPessoalOpenAPI() {
         return new OpenAPI().info(
-                        new Info().title("API do user")
+                        new Info().title("API de Autenticação")
                                 .description("Projeto Integrador AprovIA")
                                 .version("v0.0.1")
                                 .license(new License()
-                                        .name("Allan D., Bia e Nickolas")
+                                        .name("Allan D., Beatriz e Nickolas")
                                         .url("https://github.com/AllanDeyvison/manager_back"))
                                 .contact(new Contact()
-                                        .name("AIA")
+                                        .name("AprovIA")
                                         .url("")
-                                        .email("ainteligencia@gmail.com")))
+                                        .email("aprovia.faq@gmail.com")))
                 .externalDocs(new ExternalDocumentation()
                         .description("Github")
                         .url("https://github.com/AllanDeyvison/manager_back")
