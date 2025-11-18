@@ -1,5 +1,5 @@
  # Importando o JDK e copiando os arquivos necessários
-FROM openjdk:19-jdk AS build
+FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 COPY pom.xml .
 COPY src src
@@ -12,8 +12,8 @@ COPY .mvn .mvn
 RUN chmod +x ./mvnw
 RUN ./mvnw clean package -DskipTests
 
-# Etapa 2: Criar a imagem final do Docker usando o OpenJDK 19
- FROM openjdk:19-jdk
+# Etapa 2: Criar a imagem final do Docker
+ FROM eclipse-temurin:21-jdk
 VOLUME /tmp
 
 # Copiar o JAR da etapa de compilação
