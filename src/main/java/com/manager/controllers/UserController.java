@@ -56,10 +56,10 @@ public class UserController {
 
     }
 
-    @PatchMapping("/updatePassword")
-    public  ResponseEntity<Optional<User>> updatePassword(@RequestBody Map<String, String> user){
-        return ResponseEntity.status(HttpStatus.OK).body(userService.updatePassword(user.get("email"), user.get("password")));
-    }
+//    @PatchMapping("/updatePassword")
+//    public  ResponseEntity<Optional<User>> updatePassword(@RequestBody Map<String, String> user){
+//        return ResponseEntity.status(HttpStatus.OK).body(userService.updatePassword(user.get("email"), user.get("password")));
+//    }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
