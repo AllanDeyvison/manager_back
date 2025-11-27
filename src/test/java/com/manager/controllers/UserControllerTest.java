@@ -59,7 +59,7 @@ public class UserControllerTest {
         user.setUsername("adminteste");
         user.setEmail("adminteste@email.com");
         user.setName("adminteste");
-        user.setLastname("Deyvison");
+        user.setLastname("Admin");
         user.setPassword("1234");
         user.setBirthday(new Date());
     }
