@@ -39,6 +39,8 @@
 #            -H "Accept: application/json" \
 #            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
 #            https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
+
+
 name: Test and Deploy
 
 on:
@@ -64,14 +66,19 @@ jobs:
       - name: Grant mvnw permission
         run: chmod +x mvnw
 
-      # 👉 Agora rodando testes normalmente
       - name: Run tests
         run: ./mvnw test
 
-      # 👉 Build completo sem pular testes
+      # 👉 Se os testes falharem, imprime os relatórios
+      - name: Show test failure reports
+        if: failure()
+        run: |
+          echo "📄 Printing test failure reports..."
+          find target/surefire-reports -type f -name "*.txt" -exec echo "---- {} ----" \; -exec cat {} \;
+          find target/surefire-reports -type f -name "*.xml" -exec echo "---- {} ----" \; -exec cat {} \;
+
       - name: Build (with tests)
         run: ./mvnw clean package
-
 
   deploy:
     name: Deploy to Render
