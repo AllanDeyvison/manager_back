@@ -1,3 +1,45 @@
+#name: Test and Deploy
+#
+#on:
+#  push:
+#    branches: ["main"]
+#
+#jobs:
+#  test:
+#    name: Build without tests
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#
+#      - name: Set up JDK
+#        uses: actions/setup-java@v4
+#        with:
+#          distribution: 'temurin'
+#          java-version: '21'
+#          cache: maven
+#
+#      - name: Grant mvnw permission
+#        run: chmod +x mvnw
+#
+#      - name: Build (skip tests)
+#        run: ./mvnw clean package -DskipTests
+#
+#
+#  deploy:
+#    name: Deploy to Render
+#    needs: test
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - name: Trigger Render Deployment
+#        run: |
+#          curl -X POST \
+#            -H "Accept: application/json" \
+#            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+#            https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
+
 name: Test and Deploy
 
 on:
@@ -6,7 +48,7 @@ on:
 
 jobs:
   test:
-    name: Build without tests
+    name: Build with tests
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +65,13 @@ jobs:
       - name: Grant mvnw permission
         run: chmod +x mvnw
 
-      - name: Build (skip tests)
-        run: ./mvnw clean package -DskipTests
+      # 👉 Agora rodando testes normalmente
+      - name: Run tests
+        run: ./mvnw test
+
+      # 👉 Build completo sem pular testes
+      - name: Build (with tests)
+        run: ./mvnw clean package
 
 
   deploy:
