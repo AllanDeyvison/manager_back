@@ -40,7 +40,6 @@ manager_back/
 - **JWT (JSON Web Token)** para autenticação
 - **Lombok** para reduzir boilerplate
 - **Swagger/OpenAPI** para documentação automática
-- **RabbitMQ** (opcional, para mensageria)
 - **Gson** para manipulação de JSON
 - **Maven** para build e dependências
 
@@ -52,18 +51,36 @@ manager_back/
   - Cadastro, login, atualização, deleção
   - Alteração de senha e tipo de usuário (USER/ADMIN)
   - Autenticação JWT
-- **Message**
-  - Envio, listagem, busca e deleção de mensagens
-  - Associação de mensagens a usuários
 - **Segurança**
   - Filtro JWT para proteger rotas
   - Configuração de CORS e CSRF
 - **Documentação**
   - Swagger UI disponível em `/swagger-ui.html`
-- **Mensageria (RabbitMQ)**
-  - Código preparado para integração, mas comentado por padrão
 
 ---
+## Testes 
+Tipos de testes incluídos/esperados:
+- Testes unitários (serviços, utilitários) com JUnit 5 + Mockito.
+- Testes de controlador (WebMvc) com Spring Boot Test.
+
+Executar todos os testes (Windows):
+```cmd
+mvnw.cmd test
+```
+Executar todos os testes (Linux/macOS):
+```sh
+./mvnw test
+```
+
+Executar um teste específico:
+```cmd
+mvnw.cmd -Dtest=NomeDaClasseTest test
+```
+
+Executar testes com profile de teste (usar [src/main/resources/application-test.yaml](src/main/resources/application-test.yaml) se existir):
+```cmd
+mvnw.cmd -Dspring.profiles.active=test test
+```
 
 ## Como Rodar o Projeto
 
@@ -72,7 +89,6 @@ manager_back/
 - Java 17+
 - Maven 3.9+
 - PostgreSQL rodando e configurado
-- (Opcional) RabbitMQ rodando
 
 ### 2. Configuração do Banco de Dados
 
@@ -122,11 +138,8 @@ Acesse [http://localhost:8090/swagger-ui.html](http://localhost:8090/swagger-ui.
 
 - **Autenticação:** Usuários se cadastram e fazem login. O login retorna um JWT, que deve ser enviado no header `Authorization` para acessar rotas protegidas.
 - **Usuários:** Podem ser criados, atualizados, deletados e ter o tipo alterado (USER/ADMIN).
-- **Mensagens:** Usuários autenticados podem enviar, listar e deletar mensagens.
 - **Segurança:** Todas as rotas (exceto login, cadastro e update de senha) exigem autenticação JWT.
 - **Documentação:** Swagger/OpenAPI gera documentação interativa dos endpoints.
-- **Mensageria:** O projeto está preparado para enviar mensagens para uma fila RabbitMQ (código comentado).
-
 ---
 
 ## Desenvolvimento
@@ -134,16 +147,9 @@ Acesse [http://localhost:8090/swagger-ui.html](http://localhost:8090/swagger-ui.
 O projeto foi desenvolvido seguindo boas práticas de arquitetura REST, separando responsabilidades em camadas (Controller, Service, Repository, Model). O uso de Spring Security e JWT garante segurança nas operações. O Swagger facilita o entendimento e testes da API.
 
 ---
-
-## Melhorias Futuras
-
-- Implementar histórico de senhas (já existe entidade PastPasswords)
-- Adicionar testes automatizados para todos os serviços
-- Melhorar tratamento de erros e mensagens de retorno
-
 ---
 
 ## Contato
 
-Desenvolvido por [Allan Bia Nick](https://github.com/AllanDeyvison/manager_back)  
+Desenvolvido por [Allan Deyvison, Biatriz, Nickolas](https://github.com/AllanDeyvison/manager_back)  
 Dúvidas: ainteligencia@gmail.com
