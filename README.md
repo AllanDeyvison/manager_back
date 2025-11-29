@@ -126,11 +126,11 @@ ou no Windows:
 mvnw.cmd spring-boot:run
 ```
 
-A API estará disponível em: [http://localhost:8090](http://localhost:8090)
+A API estará disponível em: [https://aprovia-auth-back.onrender.com)
 
 ### 5. Acessando a Documentação
 
-Acesse [http://localhost:8090/swagger-ui.html](http://localhost:8090/swagger-ui.html) para visualizar e testar os endpoints.
+Acesse [https://aprovia-auth-back.onrender.com/swagger-ui.html](https://aprovia-auth-back.onrender.com/swagger-ui.html) para visualizar e testar os endpoints.
 
 ---
 
