@@ -151,5 +151,6 @@ O projeto foi desenvolvido seguindo boas práticas de arquitetura REST, separand
 
 ## Contato
 
-Desenvolvido por [Allan Deyvison, Biatriz, Nickolas](https://github.com/AllanDeyvison/manager_back)  
+Desenvolvido por [Allan Deyvison, Biatriz, Nickolas]
+link manager_java no render (https://aprovia-auth-back.onrender.com)  
 Dúvidas: ainteligencia@gmail.com
